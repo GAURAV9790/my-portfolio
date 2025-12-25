@@ -27,6 +27,85 @@ function SectionShell({ id, title, subtitle, children }) {
                 {subtitle}
               </p>
             )}
+            
+            {/* Social Media and CV Buttons */}
+            <div className="flex flex-wrap gap-3 mt-4">
+              <a
+                href="https://github.com/GAURAV9790"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/80 hover:bg-slate-700/80 border border-purple-500/30 text-white transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                  <path d="M9 18c-4.51 2-5-2-7-2" />
+                </svg>
+                GitHub
+              </a>
+              
+              <a
+                href="https://www.linkedin.com/in/oligaurav"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/80 hover:bg-slate-700/80 border border-purple-500/30 text-white transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+                LinkedIn
+              </a>
+              
+              <a
+                href="#contact"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 transition"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+                Contact Me
+              </a>
+              
+              <a
+                href={GauravResume}
+                download="Gaurav_Oli_Resume.pdf"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-green-500 text-white hover:opacity-90 transition"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download CV
+              </a>
+              
+              <a
+                href="https://www.instagram.com/gauravoli.07?igsh=bm9yOGw2a2Rsam00"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/80 hover:bg-slate-700/80 border border-purple-500/30 text-white transition-colors"
+                aria-label="Instagram"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+                Instagram
+              </a>
+              
+              <a
+                href="tel:+919411799414"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/80 hover:bg-slate-700/80 border border-purple-500/30 text-white transition-colors"
+                aria-label="Call Me"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                +91 9411799414
+              </a>
+            </div>
           </div>
           {children}
         </div>
@@ -311,12 +390,7 @@ function EducationSection() {
       period: 'July 2019 - June 2022',
       
     },
-    {
-      degree: 'Higher Secondary Education (Class XII)',
-      institute: 'Government Inter College, Khetikhan, Champawat, Uttarakhand',
-      period: 'June 2018 - March 2019',
-    
-    },
+   
   ]
 
   return (
@@ -481,6 +555,7 @@ function CertificationsSection() {
       </div>
     </SectionShell>
   )
+  
 }
 
 function ContactSection() {
@@ -514,6 +589,35 @@ function ContactSection() {
               <span className="text-textLightPurple font-semibold">Location:</span>{' '}
               Champawat, Uttarakhand, India
             </p>
+            <div className="flex items-center gap-4 mt-4">
+              <a
+                href="https://www.instagram.com/gauravoli.07?igsh=bm9yOGw2a2Rsam00"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white hover:text-pink-400 transition-colors"
+                aria-label="Instagram"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+                Instagram
+              </a>
+              <a
+                href="https://wa.me/919411799414"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white hover:text-green-400 transition-colors"
+                aria-label="WhatsApp"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21z" />
+                  <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a4 4 0 0 1-4-4v-1z" />
+                </svg>
+                WhatsApp
+              </a>
+            </div>
           </div>
         </div>
         <div className="rounded-2xl bg-slate-900/80 border border-purple-500/30 p-4 sm:p-5">
@@ -601,8 +705,8 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-heroStart via-heroMid to-heroEnd text-white">
       <div className="flex min-h-screen flex-col pb-8 pt-2 sm:pt-3 lg:pt-4">
-        <header className="sticky top-0 z-50 mb-4 flex flex-col gap-4 rounded-3xl bg-slate-950/80 border border-purple-500/40 px-4 py-3 backdrop-blur sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <div className="flex items-center gap-3">
+        <header className="sticky top-0 z-50 mb-4 flex items-center justify-between rounded-3xl bg-slate-950/80 border border-purple-500/40 px-4 py-3 backdrop-blur sm:px-6">
+<div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 text-xl font-bold">
               &lt;/&gt;
             </div>
@@ -613,7 +717,7 @@ function App() {
               <p className="text-xs text-textGray">Full Stack Developer</p>
             </div>
           </div>
-          <nav className="hidden md:flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
+          <nav className="hidden md:flex flex-1 justify-end items-center gap-1.5 text-xs sm:text-sm ml-4">
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.id}
@@ -640,10 +744,15 @@ function App() {
 
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center rounded-full border border-purple-500/40 bg-slate-900/70 px-3 py-1.5 text-xs font-medium text-textLightPurple"
+            className="md:hidden flex flex-col items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-green-500 text-white focus:outline-none"
             onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label="Toggle menu"
           >
-            Menu
+            <div className="space-y-1.5">
+              <span className={`block w-5 h-0.5 bg-white transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+              <span className={`block w-5 h-0.5 bg-white transition-opacity duration-300 ${mobileOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+              <span className={`block w-5 h-0.5 bg-white transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+            </div>
           </button>
         </header>
 
