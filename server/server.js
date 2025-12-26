@@ -7,6 +7,9 @@ const path = require('path');
 // Load environment variables
 dotenv.config();
 
+// Detect Vercel serverless environment
+const isVercel = !!process.env.VERCEL;
+
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -136,8 +139,8 @@ Full Stack Developer`,
   }
 });
 
-// Serve static files from the Vite build
-if (process.env.NODE_ENV === 'production') {
+// Serve static files from the Vite build when running a standalone Node server
+if (process.env.NODE_ENV === 'production' && !isVercel) {
   const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, '../dist')));
   
@@ -147,13 +150,19 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Start server
-const server = app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// When not running on Vercel, start the HTTP server normally
+let server;
+if (!isVercel) {
+  server = app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
 
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (err) => {
-  console.error('Unhandled Rejection:', err);
-  server.close(() => process.exit(1));
-});
+  // Handle unhandled promise rejections only for long-running Node server
+  process.on('unhandledRejection', (err) => {
+    console.error('Unhandled Rejection:', err);
+    server.close(() => process.exit(1));
+  });
+}
+
+// Always export the app so it can be used by Vercel serverless functions
+module.exports = app;
