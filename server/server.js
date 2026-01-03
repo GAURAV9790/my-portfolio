@@ -24,23 +24,33 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Create a test account (for development only)
+// Create a test account with Ethereal Email
+let transporter;
+
 const createTestAccount = async () => {
   const testAccount = await nodemailer.createTestAccount();
-  return {
-    user: testAccount.user,
-    pass: testAccount.pass
-  };
+  
+  // Create reusable transporter object using the default SMTP transport
+  transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false,
+    auth: {
+      user: testAccount.user,
+      pass: testAccount.pass
+    }
+  });
+
+  console.log('Test account created:');
+  console.log('Email:', testAccount.user);
+  console.log('Password:', testAccount.pass);
+  console.log('Web interface: https://ethereal.email/login');
+
+  return testAccount;
 };
 
-// Create a transporter object using the default SMTP transport
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER || 'your-email@gmail.com',
-    pass: process.env.EMAIL_PASS || 'your-app-password'
-  }
-});
+// Initialize test account
+createTestAccount().catch(console.error);
 
 // Verify connection configuration
 transporter.verify((error) => {
@@ -63,46 +73,47 @@ app.get('/api/test', (req, res) => {
 });
 
 // Email sending endpoint
-app.post('/api/send-email', async (req, res) => {
+app.post('/send-email', async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
-  const mailOptions = {
-    from: `"${name}" <${process.env.EMAIL_USER || 'your-email@gmail.com'}>`,
-    to: 'gauravoli777@gmail.com',
-    subject: `New Contact Form Submission from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-    html: `
-      <h2>New Contact Form Submission</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-      <p><strong>Message:</strong></p>
-      <p>${message.replace(/\n/g, '<br>')}</p>
-    `
-  };
+  // Wait for the transporter to be initialized
+  if (!transporter) {
+    return res.status(500).json({ error: 'Email service not ready. Please try again in a moment.' });
+  }
 
   try {
-    // Send the main email to you
+    // Send email to yourself
+    const mailOptions = {
+      from: `"${name}" <${email}>`,
+      to: email, // This will be replaced by Ethereal
+      subject: `New message from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #4F46E5;">New Message from Portfolio Contact Form</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message.replace(/\n/g, '<br>')}</p>
+        </div>
+      `
+    };
+
     const info = await transporter.sendMail(mailOptions);
     console.log('Message sent: %s', info.messageId);
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
     
-    // Send automatic thank you email to the sender
+    // Send thank you email to the sender
     const thankYouMail = {
-      from: `"Gaurav Oli" <${process.env.EMAIL_USER}>`,
+      from: '"Gaurav Oli" <noreply@example.com>',
       to: email,
       subject: 'Thank you for contacting me!',
-      text: `Dear ${name},
-
-Thank you for reaching out to me through my portfolio website. I have received your message and will get back to you as soon as possible.
-
-Best regards,
-Gaurav Oli
-Full Stack Developer`,
       html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #4F46E5;">Thank you for contacting me!</h2>
           <p>Dear ${name},</p>
           <p>Thank you for reaching out to me through my portfolio website. I have received your message and will get back to you as soon as possible.</p>
@@ -122,20 +133,23 @@ Full Stack Developer`,
     await transporter.sendMail(thankYouMail);
     console.log('Thank you email sent to:', email);
     
-    res.status(200).json({ message: 'Email sent successfully' });
+    res.status(200).json({ 
+      message: 'Email sent successfully',
+      previewUrl: nodemailer.getTestMessageUrl(info)
+    });
   } catch (error) {
-    // Log full error on the server for debugging
     console.error('Error sending email:', error);
-    if (error && error.response) {
-      console.error('SMTP response:', error.response);
-    }
-
+    
     // Send a more informative message back to the client
-    const message = error && error.message
+    const errorMessage = error && error.message
       ? `Mail error: ${error.message}`
       : 'Failed to send email due to an unknown server error.';
 
-    res.status(500).json({ error: message });
+    res.status(500).json({ 
+      error: errorMessage,
+      details: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 });
 
