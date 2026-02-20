@@ -51,7 +51,7 @@ function Chip({ children }) {
   )
 }
 
-function HomeSection({ showSocials = false }) {
+function HomeSection() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#1a103d] via-[#1e0f4a] to-[#2a0e4e]">
       <div className="w-full max-w-6xl">
@@ -334,6 +334,13 @@ function ProjectsSection() {
       hostedLink: 'https://www.integrex.in'
     },
     {
+      name: 'Varkly Global — ISO 9001 Audit Management',
+      tech: 'React, Node.js, MySQL, GoDaddy cPanel, RBAC, Authentication',
+      description: 'Built a responsive audit management web application for corporate profiles with secure authentication and role-based access control. Includes ISO 9001 compliance workflows, real-time audit checklist tracking, auditor management, audit performance monitoring, contact review, invoice generation, and payment/dues tracking.',
+      link: '',
+      hostedLink: 'https://varklyglobal.com'
+    },
+    {
       name: 'AITF Management Certification Ltd.',
       tech: 'Next.js, React, Node.js, MongoDB, Tailwind CSS',
       description: 'Developed and maintained a complete corporate website and internal certification management system for AITF Management Certification Ltd. The project includes a public-facing website for clients and an internal admin system to manage certifications, client records, automated communications, and certification workflows. Hosted on GoDaddy for reliable enterprise-grade hosting.',
@@ -346,6 +353,13 @@ function ProjectsSection() {
       description: 'Designed and developed a QMS-based financial portal for managing company invoices and billing workflows. Implemented invoice generation with structured financial data, client details, and certification references. Integrated Digital Signature functionality for authorized signatures on invoices. Developed secure admin panels for invoice management and ensured data accuracy for financial operations. Hosted on GoDaddy for enterprise reliability.',
       link: 'http://www.qmscare.com/',
       hostedLink: 'http://www.qmscare.com/'
+    },
+    {
+      name: 'The Himalayan Traveller',
+      tech: 'MERN Stack (MongoDB, Express.js, React.js, Node.js), JWT Authentication, Cloudinary, Real-time Updates',
+      description: 'A comprehensive travel blogging platform featuring user authentication, admin panel, blog management with CRUD operations, real-time interactions, likes/comments system, image uploads via Cloudinary, and a dynamic gallery section managed by admin. Built as a real-time platform for Himalayan travel enthusiasts.',
+      hostedLink: 'https://e-himalayan-traveller.vercel.app',
+      link: 'https://github.com/GAURAV9790/The-Himalayan-Traveller'
     },
     {
       name: 'Job Portal',
@@ -751,7 +765,7 @@ function ContactSection() {
 function HomePage({ onContactClick }) {
   return (
     <>
-      <HomeSection onContactClick={onContactClick} showSocials={true} />
+      <HomeSection onContactClick={onContactClick} />
       <SkillsSection />
       <ExperienceSection />
       <EducationSection />
