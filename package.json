@@ -13,10 +13,15 @@
     "build:full": "npm run build && NODE_ENV=production node server/server.js"
   },
   "dependencies": {
+    "@tsparticles/react": "^4.3.2",
+    "@tsparticles/slim": "^4.3.2",
+    "framer-motion": "^13.0.0",
     "nodemailer": "^7.0.12",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.11.0",
+    "react-tsparticles": "^2.12.2",
+    "tsparticles": "^4.3.2",
     "typed.js": "^3.0.0"
   },
   "devDependencies": {
